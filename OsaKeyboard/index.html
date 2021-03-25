@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Parcel Sandbox</title>
+		<meta charset="UTF-8" />
+	</head>
+
+	<body>
+		<div id="app">
+            <div>
+                <h2>OsaKeyboard == 한타를 영타로 변환해줌</h2>
+                <h2>OsaKeyboard in Action</h2>
+                <input type="text" id="OsaKeyboardInput" />
+            </div>
+            <div>
+                <h2>'abce김a주bㅈr혁만세1234' == 'abcerlaawnbwrgurakstp1234' // true</h2>
+            </div>
+        </div>
+
+		</div>
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.min.js"
+			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			crossorigin="anonymous"
+		></script>
+        <script src="src/index.js"> </script>
+            <script>
+			document.addEventListener("DOMContentLoaded", function () {
+                $("#OsaKeyboardInput").on( "propertychange change keyup paste input", function () {
+                  // 작업중인지 체크
+                    if (OsakeyboardMappingInProgress) {
+			        return;
+                  }
+                  // 작업 시작
+			      OsakeyboardMappingInProgress = true;
+			      const newValue = $(this).val();
+                  $("#OsaKeyboardInput").val(OsaKeyboard.mapKorToEng(newValue));
+                  OsakeyboardMappingInProgress = false;
+                  // 작업 끝
+			    }
+			  );
+            });
+            var OsakeyboardMappingInProgress = false;
+            </script>
+	</body>
+</html>
+
+
